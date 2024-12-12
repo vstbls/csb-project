@@ -5,5 +5,7 @@ from .views import *
 urlpatterns = [
     path('', loginView, name='login'),
     path('login/', processLoginView, name='processLogin'),
-    path('chat/<str:username>/', chatView, name='chat')
+    path('chat/<str:username>/', chatView, name='chat'),
+    path('send/', sendMessageView, name='send'),
+    path('search/', searchView, name='search')
 ]

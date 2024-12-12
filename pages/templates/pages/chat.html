@@ -10,8 +10,34 @@
     <h2>CSB Chat!</h2>
     <p>Logged in as: {{username}}</p>
     <p>Received messages:</p>
+    <ul>
+        {% for msg in received %}
+        <li>{{msg.sender.username}}: {{msg.content|safe}}</li>
+        {% endfor %}
+    </ul>
+    <form action="/search/" method="POST">
+        {% csrf_token %}
+        <p>Search received messages: <input name="searchstring"> <input type="submit" value="Search"/></p>
+        
+    </form>
     <p>Compose new message:</p>
+    <form action="/send/" method="GET">
+        {% csrf_token %}
+        <span>To:</span>
+        <select name="to">
+            {% for recipient in recipients %}
+                <option value="{{recipient.username}}">{{recipient.username}}</option>
+            {% endfor %}
+        </select><br/>
+        <span>Message:</span><br/>
+        <textarea name="content" rows="4" cols="50"></textarea><br/>
+        <input type="submit" value="Send"/>
+    </form>
     <p>Sent messages:</p>
-    <p>Filter messages:</p>
+    <ul>
+        {% for msg in sent %}
+        <li>To {{msg.receiver.username}}: {{msg.content|safe}}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
