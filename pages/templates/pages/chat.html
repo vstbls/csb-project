@@ -12,6 +12,7 @@
     <p>Received messages:</p>
     <ul>
         {% for msg in received %}
+        <!-- FIX FOR XSS: Simply remove "|safe" from the attribute and Django will auto-escape the string, preventing XSS -->
         <li>{{msg.sender.username}}: {{msg.content|safe}}</li>
         {% endfor %}
     </ul>
@@ -21,6 +22,11 @@
         
     </form>
     <p>Compose new message:</p>
+    <!-- FIX FOR CSRF: Change request method to POST:
+
+        <form action="/send/" method="POST">
+
+        and change business logic in views.py to match -->
     <form action="/send/" method="GET">
         {% csrf_token %}
         <span>To:</span>
@@ -36,6 +42,7 @@
     <p>Sent messages:</p>
     <ul>
         {% for msg in sent %}
+        <!-- FIX FOR XSS: Simply remove "|safe" from the attribute and Django will auto-escape the string, preventing XSS -->
         <li>To {{msg.receiver.username}}: {{msg.content|safe}}</li>
         {% endfor %}
     </ul>
