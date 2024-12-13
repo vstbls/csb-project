@@ -6,7 +6,12 @@ Django web app made for [Cyber Security Base 2024](https://cybersecuritybase.moo
 - XSS
 - CSRF
 
-Fixes for the vulnerabilities are available in the source code.
+Fixes for the vulnerabilities are available in the source code. The project comes with a database, I recommend using it. The users present in the database are:
+```
+alice:redqueen
+bob:squarepants
+clint:steven
+```
 
 To run the website:
 
