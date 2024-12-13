@@ -22,13 +22,13 @@
         
     </form>
     <p>Compose new message:</p>
-    <!-- FIX FOR CSRF: Change request method to POST:
+    <!-- FIX FOR CSRF: Change request method to POST and add a CSRF token:
 
         <form action="/send/" method="POST">
+            {% csrf_token %}
 
         and change business logic in views.py to match -->
     <form action="/send/" method="GET">
-        {% csrf_token %}
         <span>To:</span>
         <select name="to">
             {% for recipient in recipients %}
