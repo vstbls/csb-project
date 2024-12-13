@@ -81,8 +81,8 @@ def searchView(request):
     The query can be constructed safely without string formatting using Django's raw():
     
     filtered = Message.objects.raw(
-        "SELECT * FROM pages_message WHERE receiver_id=%(id) and content LIKE '%%(searchstring)%'",
-        {'id': uid, 'searchstring': searchstring}
+        "SELECT * FROM pages_message WHERE receiver_id=%s and content LIKE '%%s%'",
+        [str(uid), searchstring]
         )
     '''
     filtered = Message.objects.raw("SELECT * FROM pages_message WHERE receiver_id=" + str(uid) + " and content LIKE '%" + searchstring + "%'")
